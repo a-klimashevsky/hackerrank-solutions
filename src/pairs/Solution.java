@@ -1,19 +1,12 @@
 package pairs;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
  * https://www.hackerrank.com/challenges/pairs
  */
 class Solution {
-    int pairs(int[] a, int k) {
-        boolean[] present = new boolean[a.length];
-        boolean[] haspair = new boolean[a.length];
-        for (int i = 0; i < a.length; i++) {
-            present[i] = true;
-        }
-        return 0;
-    }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -37,5 +30,26 @@ class Solution {
         Solution solution = new Solution();
         res = solution.pairs(_a, _k);
         System.out.println(res);
+    }
+
+    int pairs(int[] a, int k) {
+        Arrays.sort(a);
+        int i = 0;
+        int j = 1;
+        int count = 0;
+        final int n = a.length;
+        while (j < n) {
+            int diff = a[j] - a[i];
+
+            if (diff == k) {
+                count++;
+                j++;
+            } else if (diff > k) {
+                i++;
+            } else if (diff < k) {
+                j++;
+            }
+        }
+        return count;
     }
 }
